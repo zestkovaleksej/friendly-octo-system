@@ -1,0 +1,23 @@
+    func addSimpleOperation() {
+        let operation1 = SimpleOperation()
+        operation1.input = "Operation1"
+        operation1.completionBlock = {
+            print("result1", operation1.output ?? "")
+        }
+        
+        operationQueue.addOperation(operation1)
+        queue.asyncAfter(deadline: .now() + 1) {
+            operation1.cancel()
+        }
+        
+        let operation2 = SimpleOperation()
+        operation2.input = "Operation2"
+        operation2.completionBlock = {
+            print("result2", operation2.output ?? "")
+        }
+        
+        operationQueue.addOperation(operation2)
+    }
+    
+    func addAsyncOperation() {
+        let operation1 = SimpleAsyncOperation()
